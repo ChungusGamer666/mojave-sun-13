@@ -24,6 +24,7 @@
 
 /datum/guestbook/ui_data(mob/user)
 	var/list/data = list()
+	data["parent"] = user.real_name
 	var/list/names = list()
 	for(var/real_name in known_names)
 		var/given_name = LAZYACCESS(known_names, real_name)

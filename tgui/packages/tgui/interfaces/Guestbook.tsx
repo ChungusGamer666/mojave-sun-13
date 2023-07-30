@@ -23,7 +23,7 @@ export const Guestbook = (props, context) => {
 
   return (
     <Window
-      title="Guestbook"
+      title={parent ? parent + ` Guestbook` : `Guestbook`}
       width={400}
       height={500}>
       <Window.Content>

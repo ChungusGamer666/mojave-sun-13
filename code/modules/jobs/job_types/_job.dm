@@ -176,18 +176,18 @@
 		if((dude == spawned) || !dude.mind?.assigned_role)
 			continue
 		var/datum/job/dudes_job = dude.mind.assigned_role
-		var/list/common_departments = dudes_job.departments_list & departments_list //wonky
+		var/common_departments = length(dudes_job.departments_list & departments_list)
 		//if we satisfy at least one condition, add us to their guestbook (if we are not a forgetmenot role)
 		if(!(guestbook_flags & GUESTBOOK_FORGETMENOT))
 			if((dudes_job.guestbook_flags & GUESTBOOK_OMNISCIENT) || \
 				((dudes_job.guestbook_flags & GUESTBOOK_JOB) && (dudes_job.type == src.type)) || \
-				((dudes_job.guestbook_flags & GUESTBOOK_DEPARTMENT) && length(common_departments)))
+				((dudes_job.guestbook_flags & GUESTBOOK_DEPARTMENT) && common_departments))
 				dude.mind.guestbook.add_guest(dude, spawned, spawned.mind.name, spawned.mind.name, silent = TRUE)
 		//if we satisfy at least one condition, add them to our guestbook (if they are not a forgetmenot role)
 		if(!(dudes_job.guestbook_flags & GUESTBOOK_FORGETMENOT))
 			if((guestbook_flags & GUESTBOOK_OMNISCIENT) || \
 				((guestbook_flags & GUESTBOOK_JOB) && (src.type == dudes_job.type)) || \
-				((guestbook_flags & GUESTBOOK_DEPARTMENT) && length(common_departments)))
+				((guestbook_flags & GUESTBOOK_DEPARTMENT) && common_departments))
 				spawned.mind.guestbook.add_guest(spawned, dude, dude.mind.name, dude.mind.name, silent = TRUE)
 
 /datum/job/proc/announce_job(mob/living/joining_mob)
